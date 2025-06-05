@@ -1,0 +1,54 @@
+name: Code Formatting
+
+on: push
+
+jobs:
+  format:
+    name: Laravel Pint
+
+    runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]'
+
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: "8.3"
+        extensions: mbstring, dom, fileinfo, mysql
+
+    - name: Get composer cache directory
+      id: composer-cache
+      run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+    - name: Cache composer dependencies
+      uses: actions/cache@v4
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: ${{ runner.os }}-composer-
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate --strict
+
+    - name: Install composer dependencies
+      run: composer install --prefer-dist --no-progress --no-interaction
+
+    - name: Log debug information
+      run: |
+        composer --version
+        php --version
+        vendor/bin/pint --version
+
+    - name: Run Laravel Pint
+      run: composer format
+
+    - name: Commit changes
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: "style: fix code formatting"

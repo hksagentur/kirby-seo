@@ -1,0 +1,21 @@
+version: 2
+updates:
+  - package-ecosystem: "composer"
+    directory: "/"
+    target-branch: "develop"
+    versioning-strategy: increase
+    schedule:
+      interval: "monthly"
+    allow:
+      - dependency-type: "direct"
+    commit-message:
+      prefix: "chore:"
+    labels:
+      - "type: maintanance"
+    groups:
+      kirby:
+        patterns:
+          - "getkirby/*"
+      tools:
+        patterns:
+          - "laravel/pint"

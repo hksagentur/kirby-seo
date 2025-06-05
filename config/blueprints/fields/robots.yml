@@ -1,0 +1,51 @@
+type: group
+fields:
+  robotsHeadline:
+    type: headline
+    label:
+      *: hksagentur.seo.field.robotsHeadline.label
+    help:
+      *: hksagentur.seo.field.robotsHeadline.help
+    numbered: false
+  robotsIndex:
+    type: toggles
+    label:
+      *: hksagentur.seo.field.robotsIndex.label
+    help:
+      *: hksagentur.seo.field.robotsIndex.help
+    width: 1/2
+    default: ''
+    options:
+      - text:
+          *: hksagentur.seo.field.robotsIndex.indeterminate
+        icon: circle-nested
+        value: ''
+      - text:
+          *: hksagentur.seo.field.robotsIndex.off
+        icon: circle
+        value: noindex
+      - text:
+          *: hksagentur.seo.field.robotsIndex.on
+        icon: circle-filled
+        value: index
+  robotsFollow:
+    type: toggles
+    label:
+      *: hksagentur.seo.field.robotsFollow.label
+    help:
+      *: hksagentur.seo.field.robotsFollow.help
+    width: 1/2
+    default: ''
+    options:
+      - text:
+          *: hksagentur.seo.field.robotsFollow.indeterminate
+        icon: circle-nested
+        value: ''
+      - text:
+          *: hksagentur.seo.field.robotsFollow.off
+        icon: circle
+        value: nofollow
+      - text:
+          *: hksagentur.seo.field.robotsFollow.on
+        icon: circle-filled
+        value: follow

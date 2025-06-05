@@ -1,0 +1,37 @@
+{
+  "name": "hksagentur/kirby-seo",
+  "description": "A simple SEO plugin for Kirby CMS",
+  "type": "kirby-plugin",
+  "license": "ISC",
+  "authors": [
+    {
+      "name": "Daniel Weidner",
+      "email": "d.weidner@hks-agentur.de",
+      "homepage": "https://hks-agentur.de"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Hks\\Seo\\": "src/"
+    }
+  },
+  "require": {
+    "getkirby/composer-installer": "^1.2.1"
+  },
+  "require-dev": {
+    "laravel/pint": "^1.22"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "allow-plugins": {
+      "getkirby/composer-installer": true
+    }
+  },
+  "scripts": {
+    "format": "pint --verbose",
+    "lint": "pint --verbose --test"
+  },
+  "extra": {
+    "installer-name": "seo"
+  }
+}

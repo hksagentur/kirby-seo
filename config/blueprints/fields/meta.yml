@@ -1,0 +1,25 @@
+type: group
+fields:
+  metaHeadline:
+    type: headline
+    label:
+      *: hksagentur.seo.field.metaHeadline.label
+    help:
+      *: hksagentur.seo.field.metaHeadline.help
+    numbered: false
+  metaTitle:
+    type: text
+    label:
+      *: hksagentur.seo.field.metaTitle.label
+    help:
+      *: hksagentur.seo.field.metaTitle.help
+    placeholder: "{{ page.defaultMetaTitle }}"
+  metaDescription:
+    type: textarea
+    label:
+      *: hksagentur.seo.field.metaDescription.label
+    help:
+      *: hksagentur.seo.field.metaDescription.help
+    font: monospace
+    buttons: false
+    placeholder: "{{ page.defaultMetaDescription }}"
