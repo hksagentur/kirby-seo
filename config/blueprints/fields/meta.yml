@@ -20,6 +20,5 @@ fields:
       *: hksagentur.seo.field.metaDescription.label
     help:
       *: hksagentur.seo.field.metaDescription.help
-    font: monospace
     buttons: false
     placeholder: "{{ page.defaultMetaDescription }}"
