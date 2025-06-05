@@ -24,7 +24,7 @@ fields:
     buttons: false
     placeholder: "{{ page.defaultMetaDescription }}"
   ogImage:
-    extends: @hksagentur/seo/fields/image
+    type: files
     label:
       *: hksagentur.seo.field.ogImage.label
     help:
@@ -32,3 +32,9 @@ fields:
     image:
       ratio: 1.91/1
       cover: true
+    query: page.images.template('image')
+    layout: list
+    multiple: false
+    info: "{{ file.dimensions }} ({{ file.niceSize }})"
+    uploads:
+      template: image
