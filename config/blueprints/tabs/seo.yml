@@ -1,0 +1,8 @@
+seo:
+  label:
+    *: hksagentur.seo.tab.seo.label
+  icon: search
+  fields:
+    meta: @hksagentur/seo/fields/meta
+    openGraph: @hksagentur/seo/fields/open-graph
+    robots: @hksagentur/seo/fields/robots

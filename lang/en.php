@@ -27,4 +27,5 @@ return [
     'hksagentur.seo.field.robotsFollow.indeterminate' => 'Standard',
     'hksagentur.seo.field.robotsFollow.on' => 'follow',
     'hksagentur.seo.field.robotsFollow.off' => 'nofollow',
+    'hksagentur.seo.tab.seo.label' => 'SEO',
 ];
