@@ -35,7 +35,7 @@ trait HasRobotsTag
         return new Field(
             parent: $this,
             key: 'robots',
-            value: $values ?: 'all'
+            value: $values ?: null
         );
     }
 }
