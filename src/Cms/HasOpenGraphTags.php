@@ -19,7 +19,7 @@ trait HasOpenGraphTags
         return $this->content()
             ->ogTitle()
             ->replace()
-            ->or($this->metaTitle());
+            ->or($this->defaultOgTitle());
     }
 
     public function ogDescription(): Field
@@ -27,14 +27,31 @@ trait HasOpenGraphTags
         return $this->content()
             ->ogDescription()
             ->replace()
-            ->or($this->metaDescription());
+            ->or($this->defaultOgDescription());
     }
 
     public function ogImage(): ?File
     {
         return $this->content()
             ->ogImage()
-            ->or($this->site()->ogImage())
+            ->toFile() ?? $this->defaultOgImage();
+    }
+
+    public function defaultOgTitle(): Field
+    {
+        return $this->metaTitle();
+    }
+
+    public function defaultOgDescription(): Field
+    {
+        return $this->metaDescription();
+    }
+
+    public function defaultOgImage(): ?File
+    {
+        return $this->site()
+            ->content()
+            ->ogImage()
             ->toFile();
     }
 }
