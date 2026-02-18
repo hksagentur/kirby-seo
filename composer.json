@@ -19,6 +19,7 @@
     "getkirby/composer-installer": "^1.2.1"
   },
   "require-dev": {
+    "getkirby/cms": "^5.3",
     "laravel/pint": "^1.22"
   },
   "config": {
@@ -32,6 +33,7 @@
     "lint": "pint --verbose --test"
   },
   "extra": {
-    "installer-name": "seo"
+    "installer-name": "seo",
+    "kirby-cms-path": false
   }
 }
