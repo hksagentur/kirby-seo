@@ -8,7 +8,7 @@ trait HasRobotsTag
 {
     public function canBeIndexedByBots(): bool
     {
-        return $this->content()->robotsFollow()->value() !== 'nofollow';
+        return $this->content()->robotsIndex()->value() !== 'noindex';
     }
 
     public function canBeFollowedByBots(): bool
