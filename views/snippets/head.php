@@ -16,7 +16,7 @@
 <?php endif ?>
 
 <?php foreach ($alternativeTranslations as $translation) : ?>
-    <meta name="alternate" href="<?= $page->urlForLanguage($translation->language()->code()) ?>" hreflang="<?= $translation->language()->code() ?>">
+    <meta name="alternate" href="<?= $page->urlForLanguage($translation->code()) ?>" hreflang="<?= $translation->code() ?>">
 <?php endforeach ?>
 
 <?php if ($alternativeTranslations->isNotEmpty()) : ?>
