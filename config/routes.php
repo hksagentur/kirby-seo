@@ -9,7 +9,7 @@ return fn (App $kirby) => [
     [
         'pattern' => 'robots.txt',
         'method' => 'GET',
-        'action' => function () use ($kirby) : Response|false {
+        'action' => function () use ($kirby): Response|false {
             /** @var callable $controller */
             $controller = $kirby->apply('seo.robots:before', [
                 'controller' => new RobotsController(),
@@ -27,7 +27,7 @@ return fn (App $kirby) => [
     [
         'pattern' => $kirby->option('hksagentur.seo.sitemap.path', 'sitemap.xml'),
         'method' => 'GET',
-        'action' => function () use ($kirby) : Response|false {
+        'action' => function () use ($kirby): Response|false {
             /** @var callable $controller */
             $controller = $kirby->apply('seo.sitemap:before', [
                 'controller' => new SitemapController(),
