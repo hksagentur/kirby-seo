@@ -20,7 +20,7 @@ return [
             return false;
         }
 
-        return $this->isListable();
+        return $this->isPublished();
     },
     'sitemapPriority' => function (): float {
         $priority = $this->content()->sitemapPriority()->toFloat(-1);
