@@ -8,7 +8,7 @@ use Kirby\Http\Response;
 return fn (App $kirby) => [
     [
         'pattern' => 'robots.txt',
-        'method' => 'GET',
+        'method' => 'GET|HEAD',
         'action' => function () use ($kirby): Response|false {
             /** @var callable $controller */
             $controller = $kirby->apply('seo.robots:before', [
@@ -26,7 +26,7 @@ return fn (App $kirby) => [
     ],
     [
         'pattern' => $kirby->option('hksagentur.seo.sitemap.path', 'sitemap.xml'),
-        'method' => 'GET',
+        'method' => 'GET|HEAD',
         'action' => function () use ($kirby): Response|false {
             /** @var callable $controller */
             $controller = $kirby->apply('seo.sitemap:before', [
