@@ -3,6 +3,10 @@
 Kirby::plugin('hksagentur/seo', [
     'options' => [
         'cache' => true,
+        'llms' => [
+            'active' => true,
+            'cacheDuration' => 24 * 60,
+        ],
         'robots' => [
             'active' => true,
             'disallow' => [],
@@ -21,4 +25,5 @@ Kirby::plugin('hksagentur/seo', [
     'snippets' => require __DIR__ . '/config/snippets.php',
     'translations' => require __DIR__ . '/config/translations.php',
     'pageMethods' => require __DIR__ . '/config/methods/page.php',
+    'siteMethods' => require __DIR__ . '/config/methods/site.php',
 ]);

@@ -33,10 +33,12 @@ class RobotsController
 
         $disallow = $options['robots']['disallow'] ?? [];
 
-        $text = $kirby->snippet('seo/robots', [
+        $text = $kirby->snippet('seo/robots', data: [
+            'kirby' => $kirby,
+            'site' => $kirby->site(),
             'disallow' => $disallow,
             'sitemap' => $path,
-        ], true);
+        ], return: true);
 
         $cache->set(
             key: 'robots',

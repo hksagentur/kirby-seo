@@ -2,8 +2,12 @@
 
 namespace Hks\Seo\Cms;
 
+use Kirby\Cms\Page;
 use Kirby\Content\Field;
 
+/**
+ * @mixin Page
+ */
 trait HasMetaTags
 {
     public function metaTitle(): Field

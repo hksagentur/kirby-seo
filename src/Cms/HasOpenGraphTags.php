@@ -3,16 +3,15 @@
 namespace Hks\Seo\Cms;
 
 use Kirby\Cms\File;
+use Kirby\Cms\Page;
 use Kirby\Content\Field;
 
+/**
+ * @mixin Page
+ */
 trait HasOpenGraphTags
 {
     use HasMetaTags;
-
-    public function ogSiteName(): Field
-    {
-        return $this->site()->title();
-    }
 
     public function ogTitle(): Field
     {

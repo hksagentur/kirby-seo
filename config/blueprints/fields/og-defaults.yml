@@ -1,0 +1,31 @@
+type: group
+fields:
+  ogSiteHeadline:
+    type: headline
+    label:
+      *: hksagentur.seo.field.ogSiteHeadline.label
+    help:
+      *: hksagentur.seo.field.ogSiteHeadline.help
+    numbered: false
+  ogSiteName:
+    type: text
+    label:
+      *: hksagentur.seo.field.ogSiteName.label
+    help:
+      *: hksagentur.seo.field.ogSiteName.help
+    placeholder: "{{ site.title }}"
+  ogImage:
+    type: files
+    label:
+      *: hksagentur.seo.field.ogSiteImage.label
+    help:
+      *: hksagentur.seo.field.ogSiteImage.help
+    image:
+      ratio: 1.91/1
+      cover: true
+    query: site.images.template('image')
+    layout: list
+    multiple: false
+    info: "{{ file.dimensions }} ({{ file.niceSize }})"
+    uploads:
+      template: image

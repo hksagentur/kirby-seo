@@ -5,14 +5,14 @@ namespace Hks\Seo\Http;
 use Kirby\Cms\App;
 use Kirby\Http\Response;
 
-class SitemapController
+class LlmsController
 {
     public function __invoke(): Response|false
     {
         $kirby = App::instance();
 
         $cache = $kirby->cache('hksagentur.seo');
-        $options = $kirby->option('hksagentur.seo.sitemap');
+        $options = $kirby->option('hksagentur.seo.llms');
 
         $active = $options['active'] ?? false;
 
@@ -20,26 +20,23 @@ class SitemapController
             return false;
         }
 
-        $xml = $cache->get('sitemap');
+        $markdown = $cache->get('llms');
 
-        if ($xml) {
-            return new Response($xml, 'text/xml');
+        if ($markdown) {
+            return new Response($markdown, 'text/plain');
         }
 
-        $items = $kirby->collection('sitemap');
-
-        $xml = $kirby->snippet('seo/sitemap', [
+        $markdown = $kirby->snippet('seo/llms', data: [
             'kirby' => $kirby,
             'site' => $kirby->site(),
-            'items' => $items,
         ], return: true);
 
         $cache->set(
-            key: 'sitemap',
-            value: $xml,
-            minutes: $options['cacheDuration'] ?? 60
+            key: 'llms',
+            value: $markdown,
+            minutes: $options['cacheDuration'] ?? 24 * 60
         );
 
-        return new Response($xml, 'text/xml');
+        return new Response($markdown, 'text/plain');
     }
 }

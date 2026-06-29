@@ -1,0 +1,33 @@
+type: group
+fields:
+  llmsHeadline:
+    type: headline
+    label:
+      *: hksagentur.seo.field.llmsSiteHeadline.label
+    help:
+      *: hksagentur.seo.field.llmsSiteHeadline.help
+    numbered: false
+  llmsTitle:
+    type: text
+    label:
+      *: hksagentur.seo.field.llmsSiteTitle.label
+    help:
+      *: hksagentur.seo.field.llmsSiteTitle.help
+    placeholder: "{{ site.title }}"
+  llmsDescription:
+    type: textarea
+    label:
+      *: hksagentur.seo.field.llmsSiteDescription.label
+    help:
+      *: hksagentur.seo.field.llmsSiteDescription.help
+    placeholder: "{{ site.metadescription }}"
+    font: monospace
+    buttons: false
+  llmsDetails:
+    type: textarea
+    label:
+      *: hksagentur.seo.field.llmsSiteDetails.label
+    help:
+      *: hksagentur.seo.field.llmsSiteDetails.help
+    font: monospace
+    buttons: false

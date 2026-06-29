@@ -11,6 +11,9 @@ return [
             return;
         }
 
-        App::instance()->cache('hksagentur.seo')->remove('sitemap');
+        $cache = App::instance()->cache('hksagentur.seo');
+
+        $cache->remove('sitemap');
+        $cache->remove('llms');
     },
 ];

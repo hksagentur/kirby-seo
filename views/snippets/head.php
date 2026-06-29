@@ -35,8 +35,8 @@
     <meta property="og:locale:alternate" content="<?= $translation->language()->locale(LC_ALL) ?>">
 <?php endforeach ?>
 
-<?php if ($page->ogSiteName()->isNotEmpty()) : ?>
-    <meta property="og:site_name" content="<?= $page->ogSiteName()->html() ?>">
+<?php if ($site->ogSiteName()->isNotEmpty()) : ?>
+    <meta property="og:site_name" content="<?= $site->ogSiteName()->html() ?>">
 <?php endif ?>
 
 <?php if ($page->ogTitle()->isNotEmpty()) : ?>

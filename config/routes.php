@@ -1,11 +1,30 @@
 <?php
 
+use Hks\Seo\Http\LlmsController;
 use Hks\Seo\Http\RobotsController;
 use Hks\Seo\Http\SitemapController;
 use Kirby\Cms\App;
 use Kirby\Http\Response;
 
 return fn (App $kirby) => [
+    [
+        'pattern' => 'llms.txt',
+        'method' => 'GET|HEAD',
+        'action' => function () use ($kirby): Response|false {
+            /** @var callable $controller */
+            $controller = $kirby->apply('seo.llms:before', [
+                'controller' => new LlmsController(),
+            ], 'controller');
+
+            $response = $controller();
+
+            $response = $kirby->apply('seo.llms:after', [
+                'response' => $response,
+            ], 'response');
+
+            return $response;
+        },
+    ],
     [
         'pattern' => 'robots.txt',
         'method' => 'GET|HEAD',

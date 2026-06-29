@@ -1,0 +1,17 @@
+type: group
+fields:
+  llmsHeadline:
+    type: headline
+    label:
+      *: hksagentur.seo.field.llmsHeadline.label
+    help:
+      *: hksagentur.seo.field.llmsHeadline.help
+    numbered: false
+  llmsDescription:
+    type: textarea
+    label:
+      *: hksagentur.seo.field.llmsDescription.label
+    help:
+      *: hksagentur.seo.field.llmsDescription.help
+    font: monospace
+    buttons: false

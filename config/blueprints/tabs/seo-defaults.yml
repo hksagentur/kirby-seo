@@ -1,0 +1,5 @@
+label:
+  *: hksagentur.seo.tab.seo.label
+icon: search
+fields:
+  openGraph: @hksagentur/seo/fields/open-graph-defaults
