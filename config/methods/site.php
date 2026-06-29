@@ -4,7 +4,6 @@ use Kirby\Cms\Page;
 use Kirby\Content\Field;
 use Kirby\Data\Yaml;
 use Kirby\Toolkit\Collection;
-
 use Kirby\Cms\File;
 
 return [
