@@ -2,4 +2,5 @@ label:
   *: hksagentur.seo.tab.seo.label
 icon: search
 fields:
-  openGraph: @hksagentur/seo/fields/open-graph-defaults
+  og: @hksagentur/seo/fields/og-defaults
+  llms: @hksagentur/seo/fields/llms-defaults

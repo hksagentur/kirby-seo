@@ -3,5 +3,6 @@ label:
 icon: search
 fields:
   meta: @hksagentur/seo/fields/meta
-  openGraph: @hksagentur/seo/fields/open-graph
+  og: @hksagentur/seo/fields/og
   robots: @hksagentur/seo/fields/robots
+  llms: @hksagentur/seo/fields/llms

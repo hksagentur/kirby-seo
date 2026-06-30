@@ -1,5 +1,0 @@
-label:
-  *: hksagentur.seo.tab.geo.label
-icon: ai
-fields:
-  llms: @hksagentur/seo/fields/llms
