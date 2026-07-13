@@ -16,7 +16,7 @@
 <?php endif ?>
 
 <?php foreach ($alternativeTranslations as $translation) : ?>
-    <meta name="alternate" href="<?= $page->urlForLanguage($translation->language()->code()) ?>" hreflang="<?= $translation->language()->code() ?>">
+    <meta name="alternate" href="<?= $page->urlForLanguage($translation->code()) ?>" hreflang="<?= $translation->code() ?>">
 <?php endforeach ?>
 
 <?php if ($alternativeTranslations->isNotEmpty()) : ?>
@@ -28,11 +28,11 @@
 <?php endif ?>
 
 <?php if ($currentTranslation) : ?>
-    <meta property="og:locale" content="<?= $currentTranslation->language()->locale(LC_ALL) ?>">
+    <meta property="og:locale" content="<?= $kirby->language($currentTranslation->code())?->locale(LC_ALL) ?>">
 <?php endif ?>
 
 <?php foreach ($alternativeTranslations as $translation) : ?>
-    <meta property="og:locale:alternate" content="<?= $translation->language()->locale(LC_ALL) ?>">
+    <meta property="og:locale:alternate" content="<?= $kirby->language($translation->code())?->locale(LC_ALL) ?>">
 <?php endforeach ?>
 
 <?php if ($site->ogSiteName()->isNotEmpty()) : ?>
