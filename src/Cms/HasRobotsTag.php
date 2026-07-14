@@ -84,7 +84,7 @@ trait HasRobotsTag
         return $page !== null ? (int) $page : 1;
     }
 
-    protected function robotsIndexRule(): string
+    protected function robotsIndexRule(): ?string
     {
         $value = $this->content()->robotsIndex()->value();
 
@@ -95,7 +95,7 @@ trait HasRobotsTag
         return $value;
     }
 
-    protected function robotsFollowRule(): string
+    protected function robotsFollowRule(): ?string
     {
         $value = $this->content()->robotsFollow()->value();
 
