@@ -12,12 +12,24 @@ trait HasRobotsTag
 {
     public function canBeIndexedByBots(): bool
     {
-        return $this->content()->robotsIndex()->value() !== 'noindex';
+        return $this->robotsIndexRule() !== 'noindex';
     }
 
     public function canBeFollowedByBots(): bool
     {
-        return $this->content()->robotsFollow()->value() !== 'nofollow';
+        return $this->robotsFollowRule() !== 'nofollow';
+    }
+
+    public function robots(): Field
+    {
+        return new Field(
+            parent: $this,
+            key: 'robots',
+            value: implode(',', array_filter([
+                $this->robotsIndexRule(),
+                $this->robotsFollowRule(),
+            ]))
+        );
     }
 
     public function canonical(): Field
@@ -25,21 +37,72 @@ trait HasRobotsTag
         return new Field(
             parent: $this,
             key: 'canonical',
-            value: $this->canBeIndexedByBots() ? $this->url() : null
+            value: $this->canBeIndexedByBots() ? $this->canonicalUrl() : null
         );
     }
 
-    public function robots(): Field
+    public function canonicalUrl(): string
     {
-        $values = implode(',', array_filter([
-            $this->content()->robotsIndex()->value(),
-            $this->content()->robotsFollow()->value(),
-        ]));
+        $variable = $this->paginationVariable();
+        $page = $this->paginationPage();
 
-        return new Field(
-            parent: $this,
-            key: 'robots',
-            value: $values ?: null
-        );
+        if (! $this->isPaginated()) {
+            return $this->url();
+        }
+
+        return match ($this->paginationMethod()) {
+            'query' => $this->url(['query' => [$variable => $page]]),
+            'param' => $this->url(['params' => [$variable => $page]]),
+        };
+    }
+
+    protected function isPaginated(): bool
+    {
+        return $this->paginationPage() > 1;
+    }
+
+    protected function paginationMethod(): string
+    {
+        return $this->kirby()->option('pagination.method', 'param');
+    }
+
+    protected function paginationVariable(): string
+    {
+        return $this->kirby()->option('pagination.variable', 'page');
+    }
+
+    protected function paginationPage(): int
+    {
+        $variable = $this->paginationVariable();
+
+        $page = match ($this->paginationMethod()) {
+            'query' => $this->kirby()->request()->query()->get($variable),
+            'param' => $this->kirby()->request()->params()->get($variable),
+            default => null,
+        };
+
+        return $page !== null ? (int) $page : 1;
+    }
+
+    protected function robotsIndexRule(): string
+    {
+        $value = $this->content()->robotsIndex()->value();
+
+        if ($value === '' && $this->isPaginated()) {
+            return 'noindex';
+        }
+
+        return $value;
+    }
+
+    protected function robotsFollowRule(): string
+    {
+        $value = $this->content()->robotsFollow()->value();
+
+        if ($value === '' && $this->isPaginated()) {
+            return 'follow';
+        }
+
+        return $value;
     }
 }
