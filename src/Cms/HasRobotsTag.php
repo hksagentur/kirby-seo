@@ -86,23 +86,33 @@ trait HasRobotsTag
 
     protected function robotsIndexRule(): ?string
     {
-        $value = $this->content()->robotsIndex()->value();
+        $field = $this->content()->robotsIndex();
 
-        if ($value === '' && $this->isPaginated()) {
-            return 'noindex';
+        if ($field->isEmpty()) {
+            return $this->defaultRobotsIndexRule();
         }
 
-        return $value;
+        return $field->value();
+    }
+
+    protected function defaultRobotsIndexRule(): ?string
+    {
+        return $this->isPaginated() ? 'noindex' : null;
     }
 
     protected function robotsFollowRule(): ?string
     {
-        $value = $this->content()->robotsFollow()->value();
+        $field = $this->content()->robotsFollow();
 
-        if ($value === '' && $this->isPaginated()) {
-            return 'follow';
+        if ($field->isEmpty()) {
+            return $this->defaultRobotsFollowRule();
         }
 
-        return $value;
+        return $field->value();
+    }
+
+    protected function defaultRobotsFollowRule(): ?string
+    {
+        return $this->isPaginated() ? 'follow' : null;
     }
 }
