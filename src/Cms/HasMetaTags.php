@@ -2,6 +2,7 @@
 
 namespace Hks\Seo\Cms;
 
+use Closure;
 use Kirby\Cms\Page;
 use Kirby\Content\Field;
 
@@ -10,41 +11,56 @@ use Kirby\Content\Field;
  */
 trait HasMetaTags
 {
-    public function metaTitle(): Field
+    /**
+     * @return array<string, mixed>
+     */
+    public function metaDefaults(?string $languageCode = null): array
     {
-        return $this->content()
+        return [];
+    }
+
+    public function metaDefault(string $key, ?Closure $fallback = null, ?string $languageCode = null): MetaValue
+    {
+        return MetaCascade::for($this, $languageCode)->get($key, $fallback);
+    }
+
+    public function metaTitle(?string $languageCode = null): Field
+    {
+        return $this->content($languageCode)
             ->metaTitle()
             ->replace()
-            ->or($this->defaultMetaTitle());
+            ->or($this->defaultMetaTitle($languageCode));
     }
 
-    public function metaDescription(): Field
+    public function metaDescription(?string $languageCode = null): Field
     {
-        return $this->content()
+        return $this->content($languageCode)
             ->metaDescription()
             ->replace()
-            ->or($this->defaultMetaDescription());
+            ->or($this->defaultMetaDescription($languageCode));
     }
 
-    public function defaultMetaTitle(): Field
+    public function defaultMetaTitle(?string $languageCode = null): Field
     {
         return new Field(
             parent: $this,
             key: 'metaTitle',
-            value: $this->title()->value(),
+            value: $this->metaDefault(
+                key: 'metaTitle',
+                languageCode: $languageCode,
+            )->toString(),
         );
     }
 
-    public function defaultMetaDescription(): Field
+    public function defaultMetaDescription(?string $languageCode = null): Field
     {
         return new Field(
             parent: $this,
             key: 'metaDescription',
-            value: match (true) {
-                $this->content()->blocks()->exists() => $this->content()->blocks()->toBlocks()->excerpt(160),
-                $this->content()->text()->exists() => $this->content()->text()->excerpt(160),
-                default => null,
-            }
+            value: $this->metaDefault(
+                key: 'metaDescription',
+                languageCode: $languageCode,
+            )->toExcerpt(length: 160),
         );
     }
 }

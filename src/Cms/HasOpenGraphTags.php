@@ -13,44 +13,61 @@ trait HasOpenGraphTags
 {
     use HasMetaTags;
 
-    public function ogTitle(): Field
+    public function ogTitle(?string $languageCode = null): Field
     {
-        return $this->content()
+        return $this->content($languageCode)
             ->ogTitle()
             ->replace()
-            ->or($this->defaultOgTitle());
+            ->or($this->defaultOgTitle($languageCode));
     }
 
-    public function ogDescription(): Field
+    public function ogDescription(?string $languageCode = null): Field
     {
-        return $this->content()
+        return $this->content($languageCode)
             ->ogDescription()
             ->replace()
-            ->or($this->defaultOgDescription());
+            ->or($this->defaultOgDescription($languageCode));
     }
 
-    public function ogImage(): ?File
+    public function ogImage(?string $languageCode = null): ?File
     {
-        return $this->content()
+        return $this->content($languageCode)
             ->ogImage()
-            ->toFile() ?? $this->defaultOgImage();
+            ->toFile() ?? $this->defaultOgImage($languageCode);
     }
 
-    public function defaultOgTitle(): Field
+    public function defaultOgTitle(?string $languageCode = null): Field
     {
-        return $this->metaTitle();
+        return new Field(
+            parent: $this,
+            key: 'ogTitle',
+            value: $this->metaDefault(
+                key: 'ogTitle',
+                fallback: fn () => $this->metaTitle($languageCode)->value(),
+                languageCode: $languageCode,
+            )->toString(),
+        );
     }
 
-    public function defaultOgDescription(): Field
+    public function defaultOgDescription(?string $languageCode = null): Field
     {
-        return $this->metaDescription();
+        return new Field(
+            parent: $this,
+            key: 'ogDescription',
+            value: $this->metaDefault(
+                key: 'ogDescription',
+                fallback: fn () => $this->metaDescription($languageCode)->value(),
+                languageCode: $languageCode,
+            )->toPlainText(),
+        );
     }
 
-    public function defaultOgImage(): ?File
+    public function defaultOgImage(?string $languageCode = null): ?File
     {
-        return $this->site()
-            ->content()
-            ->ogImage()
-            ->toFile();
+        return $this->metaDefault(
+            key: 'ogImage',
+            fallback: fn () => $this->site()->content($languageCode)->ogImage(),
+            languageCode: $languageCode,
+        )->toFile();
     }
 }

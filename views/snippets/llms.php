@@ -8,10 +8,10 @@
 <?= $site->llmsDetails()->value() . "\n" ?>
 
 <?php endif ?>
-<?php foreach ($site->llmsSections()->toStructure() as $section): ?>
-## <?= $section->title()->value() . "\n" ?>
+<?php foreach ($site->llmsSections() as $section): ?>
+## <?= $section->title() . "\n" ?>
 
-<?php foreach ($section->items()->toPages() as $item): ?>
+<?php foreach ($section->pages() as $item): ?>
 <?php if ($item->llmsDescription()->isNotEmpty()): ?>
 - [<?= $item->title()->value() ?>](<?= $item->url() ?>): <?= $item->llmsDescription()->value() . "\n" ?>
 <?php else: ?>

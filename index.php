@@ -1,8 +1,18 @@
 <?php
 
+use Kirby\Cms\Page;
+
 Kirby::plugin('hksagentur/seo', [
     'options' => [
         'cache' => true,
+        'meta' => [
+            'metaTitle' => fn (Page $page, ?string $languageCode = null) => $page->content($languageCode)->title(),
+            'metaDescription' => fn (Page $page, ?string $languageCode = null) => match (true) {
+                $page->content($languageCode)->blocks()->isNotEmpty() => $page->content($languageCode)->blocks()->toBlocks(),
+                $page->content($languageCode)->text()->isNotEmpty() => $page->content($languageCode)->text(),
+                default => null,
+            },
+        ],
         'llms' => [
             'active' => true,
             'cacheDuration' => 24 * 60,
