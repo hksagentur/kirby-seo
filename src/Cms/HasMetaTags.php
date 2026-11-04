@@ -60,7 +60,7 @@ trait HasMetaTags
             value: $this->metaDefault(
                 key: 'metaDescription',
                 languageCode: $languageCode,
-            )->toExcerpt(length: 160),
+            )->toExcerpt(),
         );
     }
 }
