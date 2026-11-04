@@ -5,6 +5,7 @@ namespace Hks\Seo\Cms;
 use Hks\Seo\Toolkit\Html;
 use Kirby\Cms\Blocks;
 use Kirby\Cms\File;
+use Kirby\Cms\Page;
 use Kirby\Content\Field;
 use Kirby\Toolkit\Str;
 
@@ -80,6 +81,26 @@ readonly class MetaValue
         return match (true) {
             $this->value instanceof File => $this->value,
             $this->value instanceof Field => $this->value->toFile(),
+            default => null,
+        };
+    }
+
+    public function toPage(): ?Page
+    {
+        return match (true) {
+            $this->value instanceof Page => $this->value,
+            $this->value instanceof Field => $this->value->toPage(),
+            default => null,
+        };
+    }
+
+    public function toUrl(): ?string
+    {
+        return match (true) {
+            $this->value instanceof Page => $this->value->url(),
+            $this->value instanceof File => $this->value->url(),
+            $this->value instanceof Field => $this->toPage()?->url() ?? $this->toFile()?->url() ?? $this->value->toUrl(),
+            is_string($this->value) => $this->value ?: null,
             default => null,
         };
     }
